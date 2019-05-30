@@ -6,7 +6,7 @@ export interface ForkJoinTransparentData {
     percentage: number;
 }
 
-export function forkJoinTransparent(...arrayOfObservables: any[]): Observable<ForkJoinTransparentData> {
+export function forkJoinTransparent(arrayOfObservables: any[]): Observable<ForkJoinTransparentData> {
 
     const emptyArray: any[] = Array.from(Array(arrayOfObservables.length));
     const initialValue: ForkJoinTransparentData = {data: emptyArray, percentage: 0};
