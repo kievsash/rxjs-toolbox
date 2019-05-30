@@ -1,5 +1,5 @@
 import {merge, Observable} from 'rxjs';
-import {map, scan, startWith, takeLast } from 'rxjs/operators';
+import {map, scan, startWith, takeLast} from 'rxjs/operators';
 
 export interface ForkJoinTransparentData {
     data: any;
@@ -20,7 +20,7 @@ export function forkJoinTransparent(...arrayOfObservables: any[]): Observable<Fo
 
     return merge(...modilefiedObservablesList).pipe(
         startWith(initialValue),
-        scan((acc, next) => {
+        scan((acc: ForkJoinTransparentData, next: { data: any, index }) => {
             const newAcc: ForkJoinTransparentData = {data: [...acc.data], percentage: acc.percentage};
 
             newAcc.data[next.index] = next.data;
