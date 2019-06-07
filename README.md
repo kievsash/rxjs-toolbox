@@ -17,8 +17,9 @@ A combination operator that combines multiple sources and returns their last emi
 ### Usage
 ```typescript
 import { ajax } from 'rxjs/ajax';
-import { forkJoinTransparent } from 'rxjs-toolbox';
-import {tap, filter} from 'rxjs/operators';
+import { merge } from 'rxjs';
+import { forkJoinWithProgress } from 'rxjs-toolbox';
+import {tap, mergeMap, ignoreElements} from 'rxjs/operators';
 
 const getUserDetails = userIdsList => {
   
@@ -26,22 +27,25 @@ const getUserDetails = userIdsList => {
     ajax('https://jsonplaceholder.typicode.com/comments/' + userId)
   )
   
-  return forkJoinTransparent(arrayOfObservables)
+  return forkJoinWithProgress(arrayOfObservables)
 }
 
 
 const result$ = getUserDetails([1, 2, 15]);
 
 result$.pipe(
-  tap((data) => console.log('percentage: ', data)),
-  filter(data => data.percentage === 100)
-)
-.subscribe((data) => console.log('final value: ', data.data));
+  mergeMap(([finalResult, progress]) => merge(
+    progress.pipe(
+      tap((value) => console.log(`${value} completed`)),
+      ignoreElements()
+    ),
+    finalResult
+  ))
+).subscribe(values => console.log(values), console.warn);
 
 // Output:
-// percentage:  {data: Array(3), percentage: 0}
-// percentage:  {data: Array(3), percentage: 33.333333333333336}
-// percentage:  {data: Array(3), percentage: 66.66666666666667}
-// percentage:  {data: Array(3), percentage: 100}
+// 33.333333333333336 completed
+// 66.66666666666667 completed
+// 100 completed
 // final value:  (3) [{…}, {…}, {…}]
 ```
