@@ -1,5 +1,6 @@
 {
   "private": true,
+  "version": "2.1",
   "scripts": {
     "build": "ng-packagr -p src/ng-package.json",
     "postbuild": "npm run build:readme",
