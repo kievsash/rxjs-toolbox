@@ -15,7 +15,7 @@ A combination operator that combines multiple sources and returns their last emi
 ```typescript
 import { ajax } from 'rxjs/ajax';
 import { merge } from 'rxjs';
-import { forkJoinWithProgress } from 'rxjs-toolbox';
+`import { forkJoinWithProgress } from 'rxjs-toolbox';`
 import {tap, mergeMap, ignoreElements} from 'rxjs/operators';
 
 const getUserDetails = userIdsList => {
@@ -49,3 +49,23 @@ result$.pipe(
 
 #### Helper functions
 ##### timeRange
+ Function to create Observable that will emit values with specified delays
+######Params:
+*range* - array of objects with special structure [{value: <some value>, delay: <delayInMs>},...]
+
+*isRelative* - if true = next emissions is scheduled only after previous is complete (so delays are summarized).
+
+if false - all values are scheduled at once (delay values are absolute in relation to the moment of subscription)
+
+```typescript
+ const range$ = timeRange([
+   {value: 15, delay: 1500}, // 1500ms
+   {value: 15, delay: 2500} // 2500ms
+ ])
+
+  const range2$ = timeRange([
+   {value: 15, delay: 1500}, // 1500ms
+   {value: 15, delay: 2500} // 1500+2500
+ ], true);
+
+```
