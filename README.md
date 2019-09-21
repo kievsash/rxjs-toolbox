@@ -6,15 +6,12 @@ Install using NPM CLI
 npm install --save rxjs-toolbox
 ```
 
-or using Yarn CLI
-```
-yarn add rxjs-multi-scan
-```
-
 ### forkJoin-transparent
 A combination operator that combines multiple sources and returns their last emitted data as well as percentage of their completion.
 
 ### Usage
+
+#### forkJoinWithProgress
 ```typescript
 import { ajax } from 'rxjs/ajax';
 import { merge } from 'rxjs';
@@ -49,3 +46,6 @@ result$.pipe(
 // 100 completed
 // final value:  (3) [{…}, {…}, {…}]
 ```
+
+#### Helper functions
+##### timeRange
