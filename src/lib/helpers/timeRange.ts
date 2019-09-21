@@ -22,5 +22,3 @@ export function timeRange(range: any[], isRelative: boolean = false): Observable
   const obsArray: Observable<any>[] = range.map(item => of(item.value).pipe(delay(item.delay)));
   return isRelative ? concat(...obsArray) : merge(...obsArray);
 }
-
-
