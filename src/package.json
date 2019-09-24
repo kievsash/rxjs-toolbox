@@ -1,7 +1,7 @@
 {
   "name": "rxjs-toolbox",
   "description": "RxJS-toolbox - set of custom operators and handy factory functions for RxJS.",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "license": "MIT",
   "author": {
     "name": "Oleksandr Poshtaruk",
