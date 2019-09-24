@@ -69,3 +69,19 @@ if false - all values are scheduled at once (delay values are absolute in relati
  ], true);
 
 ```
+
+##### finalizeWithValue
+Provides (unlike original [finalize](https://rxjs.dev/api/operators/finalize) from RxJS) source$'s last emitted value (if any) in format {value: <lastValue>}
+If source$ completes with noe emitted value - provide undefined.
+Author - Ben Lesh, taken [here](https://github.com/ReactiveX/rxjs/issues/4803#issuecomment-496711335)
+
+```typescript
+
+from([1,3]).pipe(
+  finalizeWithValue((lastEmittedValue) => console.log(lastEmittedValue)) // 3
+)
+
+```
+
+### Want to learn RxJS?
+Try my ["Hands-on RxJS for Web Development"](https://www.udemy.com/course/hands-on-rxjs-for-web-development/) video-course!
