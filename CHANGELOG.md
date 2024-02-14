@@ -1,4 +1,7 @@
 # Changelog of `RxJS-toolbox` 
+## 16.0.0 (2024-02-14)
+### waitUntil
+Added waitUntil operator from auth0-angular interceptor codebase.
 
 ## 2.0.0 (2019-06-07)
 ### breaking change

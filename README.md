@@ -1,5 +1,7 @@
 # RxJS-toolbox - set of custom operators and handy factory functions for RxJS
 
+*Note: updated to Angular 16.x in version 2.2.0
+
 ## Installation
 Install using NPM CLI
 ```
@@ -45,6 +47,22 @@ result$.pipe(
 // 66.66666666666667 completed
 // 100 completed
 // final value:  (3) [{…}, {…}, {…}]
+```
+
+#### waitUntil
+I found an interesting #rxjs custom operator in [auth0-angular interceptor](https://github.com/auth0/auth0-angular/blob/v2.2.3/projects/auth0-angular/src/lib/auth.interceptor.ts) codebase: waitUntil
+
+It holds until the param observable emits first value- and then switches to the source
+
+######Params:
+isLoaded$
+```typescript
+isLoaded$ // - some observable we wait for
+  ...
+of(route).pipe(
+    waitUntil(isLoaded$)
+)
+...
 ```
 
 #### Helper functions
